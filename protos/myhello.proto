@@ -1,0 +1,21 @@
+//语法
+syntax = "proto3";
+package myhello;
+
+//提供的服务
+service MyHelloReply{
+  // 服务端提供的方法，客户端访问的方法
+  // 方法的参数类型，响应类型
+  rpc GetReply(Name) returns (Reply) {}
+}
+
+
+// message消息体，定义参数类型
+message Name{
+  string name = 1;
+}
+
+// message消息体，定义参数类型
+message Reply{
+  string msg = 1;
+}

@@ -1,15 +1,28 @@
-name: Build Proto
+name: Compile protobuf
 
-on: [ push ]
+on: [push]
 
 jobs:
-  Build-Proto:
+  build:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Build protos
-      uses: grpc/grpc-gateway@v2.4.0
+
+    - name: Install protobuf
+      run: |
+        sudo apt-get install protobuf-compiler
+        pip install protobuf
+
+    - name: Compile protobuf files to Python
+      run: |
+        protoc --python_out=${{ github.workspace }}/movie_proto -I=${{ github.workspace }}/movie_proto ${GLOB_PATTERN}
+      env:
+        GLOB_PATTERN: "movie.proto"
+
+    - name: Upload generated Python files
+      uses: actions/upload-artifact@v2
       with:
-        proto_path: ./movie_proto
-        plugin: python
+        name: python-files
+        path: ${{ github.workspace }}/movie_proto

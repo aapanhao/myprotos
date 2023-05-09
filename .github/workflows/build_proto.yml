@@ -17,6 +17,19 @@ jobs:
 
     - name: Compile protobuf files to Python
       run: |
-        protoc --python_out=/movie_proto -I=/movie_proto ${GLOB_PATTERN}
-      env:
-        GLOB_PATTERN: "movie.proto"
+        protoc --python_out=${{ github.workspace }}/generated -I=${{ github.workspace }}/movie_proto movie.proto
+
+    -name: Commit files
+      uses: EndBug/add-and-commit@v7
+        with:
+          author_name: aapanhao
+          author_email: aapanhao@gmail.com
+          message: 'Generated protobuf files'
+          add: |
+            generated/*.py
+          force: true
+
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}

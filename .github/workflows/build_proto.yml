@@ -17,6 +17,6 @@ jobs:
 
     - name: Compile protobuf files to Python
       run: |
-        protoc --python_out=${{ github.workspace }}/movie_proto --grpc_python_out=${{ github.workspace }}/movie_proto -I=${{ github.workspace }}/movie_proto ${GLOB_PATTERN}
+        protoc --python_out=${{ github.workspace }}/movie_proto -I=${{ github.workspace }}/movie_proto ${GLOB_PATTERN}
       env:
         GLOB_PATTERN: "movie.proto"

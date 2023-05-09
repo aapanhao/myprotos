@@ -19,14 +19,12 @@ jobs:
       run: |
         protoc --python_out=${{ github.workspace }}/generated -I=${{ github.workspace }}/movie_proto movie.proto
 
-    -name: Commit files
+    - name: Commit generated files
       uses: EndBug/add-and-commit@v7
-        with:
-          author_name: aapanhao
-          author_email: aapanhao@gmail.com
-          message: 'Generated protobuf files'
-          add: |
-            generated/*.py
+      with:
+        message: 'Generated protobuf files'
+        add: |
+          generated/*.py
           force: true
 
     - name: Push changes

@@ -1,0 +1,11 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: action/checkout@v2
+      - name: Build protos
+        uses: grpc/grpc-gateway@v2.4.0
+        with:
+          proto_path: ./movie_proto
+          plugin: python

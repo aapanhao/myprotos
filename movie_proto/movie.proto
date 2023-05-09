@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+
+service MovieWiki {
+  rpc GetMovieInfo(MovieName) returns (MovieInfo) {}
+}
+
+
+message MovieName {
+  string name = 1;
+}
+
+message MovieInfo {
+  string name = 1;
+  string year = 2;
+  string rating = 3;
+}

@@ -17,14 +17,14 @@ jobs:
 
     - name: Compile protobuf files to Python
       run: |
-        protoc --python_out=${{ github.workspace }}/generated -I=${{ github.workspace }}/movie_proto movie.proto
+        protoc --python_out=${{ github.workspace }}/movie_proto -I=${{ github.workspace }}/movie_proto movie.proto
 
     - name: Commit generated files
       uses: EndBug/add-and-commit@v7
       with:
         message: 'Generated protobuf files'
         add: |
-          generated/*.py
+          movie_proto/*.py
           force: true
 
     - name: Push changes

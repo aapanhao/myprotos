@@ -1,5 +1,8 @@
+name: GitHub Build Proto Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [ push ]
 jobs:
-  build:
+  Build-Proto-Actions:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

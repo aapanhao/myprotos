@@ -1,14 +1,17 @@
-name: GitHub Build Proto Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [ push ]
+name: Build Proto
+
+on:
+  push:
+    branches: [ main ]
+
 jobs:
-  Build-Proto-Actions:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: action/checkout@v2
-      - name: Build protos
-        uses: grpc/grpc-gateway@v2.4.0
-        with:
-          proto_path: ./movie_proto
-          plugin: python
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Build protos
+      uses: grpc/grpc-gateway@v2.4.0
+      with:
+        proto_path: ./movie_proto
+        plugin: python
